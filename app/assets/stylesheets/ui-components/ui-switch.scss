@@ -1,0 +1,91 @@
+.switch-container {
+	$width: 114px;
+	$height: 29px;
+	$border-width: 2px;
+	$border-color: #ccc;
+	$shadow: 3px rgba(0,0,0,0.4);
+
+	cursor: pointer;
+	border-radius: 500px;
+	overflow: hidden;
+	height: $height;
+	width: $width;
+	border: $border-width solid $border-color;
+	background: $border-color;
+	position: relative;
+	text-align: left;
+	@include transform(translate(0)); // Fixes bug in Chrome (and maybe others) that causes overflow-hidden to be lost when another element on the page has a transform animation
+
+	.shadow {
+		border-radius: 500px;
+		width: $width;
+		height: $height;
+		position: absolute;
+		top:0;
+		left:0;
+		box-shadow: 2px 2px $shadow inset, -2px 2px $shadow inset;
+	}
+	
+	// Cut off shadow width at midpoint of the switch. Otherwise, the shadow will be slightly
+	// visibile at the far-side of the switch (border-radius rendering bug)
+	&:not(.transitioning) .shadow {width: $width - $height/2}
+
+
+	.switch-inner {
+		width: $width *2;
+		transition: margin-left .5s;
+	}
+	&.no-transition .switch-inner {transition: none}
+
+	.switch-inner div {
+		vertical-align: top;
+		position: relative;
+		height: $height;
+		display: inline-block;
+	}
+
+	.option {
+		// -1px on the width is part of the border-radius fix. Otherwise, the background of the option
+		// shows through slightly just after the midline of the switch. This reduction in 1px of width
+		// is compensated for with 1px margins on both options
+		width: $width - $height/2 - 1px;
+		padding-top: 3px;
+		color: white;
+		text-transform: uppercase;
+		text-align: center;
+	}
+
+	$option-padding: 11px;
+	.option-on {
+		background: green;
+		padding-right: $option-padding;
+		margin-right: 1px;
+	}
+	.option-off {
+		background: #c00;
+		padding-left: $option-padding - 1;
+		margin-left: 1px
+	}
+	&:not(.transitioning) .option-off {background: $border-color} // border-radius rendering bug fix
+
+	.switch {
+		border-radius: 50%;
+		width: $height;
+		margin-top: -$border-width;
+		margin-left: -$height/2 - $border-width;
+		margin-right: -$height/2 - $border-width;
+		background: #ccc;
+		z-index: 1;
+		box-shadow: -3px 0 $shadow, 3px 0 $shadow;
+	}
+
+	&.off {
+		.switch-inner {margin-left: -$width + $height}
+		.option-off {background: #c00}
+		&:not(.transitioning) .option-on {background: $border-color} // border-radius rendering bug fix
+		.shadow {
+			left: auto;
+			right: -1px;
+		}
+	}
+}

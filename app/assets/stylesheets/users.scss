@@ -1,0 +1,96 @@
+$avatar-size: 130px;
+
+.users.show {
+	
+	h2 {margin-bottom: $font-size}
+	.joined, .edit {margin-bottom: $font-size * 3}
+	.edit {margin-top: -$font-size * 2}
+
+	.avatar {margin-top: $font-size * 1.25}
+
+	.content {
+		@include display-flex;
+
+		&> div {
+			@include flex(1);
+			@include last-child(margin-right, $font-size * 2);
+		}
+	}
+
+	table {
+		text-align: left;
+		width: 100%;
+		margin-top: $font-size;
+	}
+
+	@media (max-width: 800px) {
+		.content {
+			display: block;
+
+			&>div {@include last-child(margin, 0 0 $font-size * 2 0)}
+		}
+	}
+}
+
+.users, .login, .password-reset {
+	main {text-align: center}
+	h2 {text-align: center}
+
+	form {
+		width: 200px;
+		margin: 0 auto;
+		padding-bottom: $font-size * 2;
+	}
+
+	.avatar {
+		@include ellipse($avatar-size);
+		display: inline-block;
+	}
+
+	button {
+		display: block;
+		width: 100%;
+
+		&.danger {
+			float: none;
+			margin-top: $font-size * 4;
+		}
+	}
+
+	.forgot-password {
+		margin-top: $font-size * 2;
+		text-align: center;
+	}
+
+	.drop-box {
+		position: relative;
+		margin: 0 auto $font-size auto;
+		@include ellipse($avatar-size);
+
+		.img {
+			opacity: 0.3;
+			border: 1px solid #333;
+			background-size: cover;
+			background-position: center
+		}
+
+		.msg {
+			@include center;
+			text-align: center;
+			width: 100%;
+		}
+
+		&.changed {
+			.img {
+				opacity: 1;
+				border: none;
+			}
+
+			.msg {display: none}
+		}
+
+		&.dragover {box-shadow: 0 0 25px $blue3}
+	}
+}
+
+.password-reset.new form {width: 300px}

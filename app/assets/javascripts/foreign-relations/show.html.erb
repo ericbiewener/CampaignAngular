@@ -1,0 +1,24 @@
+<ui-ajax-throbber name="main" visible="true"></ui-ajax-throbber>
+
+<div class="info">
+	<h4>Viewing personal selections.</h4>
+	<a href="/#/foreign-relations">View site-wide results</a>
+</div>
+
+<div class="container">
+	<div class="svg-wrapper" fn-zoomable fn-draggable fn-pinchable>
+		<%= inline_svg('world-map.svg', id: 'world-map') %>
+	</div>
+</div>
+
+<ng-include src="'foreign-relations/controls.html'"></ng-include>
+
+<div class="hovered-country" ng-show="hoveredCountry">{{hoveredCountry}}</div>
+
+<div class="modal" ng-if="!storage.hideForeignRelationsShow">
+	<div class="content">
+		<p>Click on a country to vote for whether I should make them an ally or enemy!</p>
+		<p>Use the Friend/Foe button <span class="no-mobile">or hold down SHIFT on your keyboard </span>to toggle your vote.</p>
+		<button ng-click="closeModal()">Got it!</button>
+	</div>
+</div>

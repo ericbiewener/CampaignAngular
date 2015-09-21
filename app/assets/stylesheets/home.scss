@@ -1,0 +1,317 @@
+// @TODO need media queries for smaller versions of the background image
+
+.home {
+	$red: #ff8080;
+	background: black;
+	opacity: 0;
+
+	main {
+		max-width: 100%;
+		padding: 0;
+	}
+	
+	#bg {
+		width: 100vw;
+		height: 100vh;
+		position: fixed;
+		top: 0;
+		left: 0;
+
+		& div {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100vw;
+		}
+
+		&.no-blur {@include filter(blur(0) !important)}
+	}
+
+	#sky {
+		background: image-url('galaxy-5120x3200.jpg') no-repeat center center / cover;
+		opacity: .5;
+		height: 100vh;
+	}
+
+	#landscape {
+		$width-height-ratio: 1000.001/188.954;
+
+		// Width of 101% necessary to prevent single pixel border on edge showing through (Chrome)
+		background: asset-data-url('landscape-silhouette.svg') no-repeat center / 101%;
+		@include transform(scale(1.5));
+		height: 100vw / $width-height-ratio;
+	}
+
+	#start-arrow {
+		@include center(true, false, fixed);
+		bottom: 20px;
+		$size: 50px;
+		width: $size;
+		height: $size * 100/320;
+
+		polyline {
+			stroke: white;
+			stroke-width: 7;
+		}
+	}
+
+	section {
+		position: relative;
+		width: 100%;
+		text-align: center;
+		overflow: hidden;
+	}
+
+	#screen1 {
+		color: white;
+		padding-top: 45vh;
+		height: 160vh;
+
+		h2 {font-weight: 300}
+
+		.line-1 {@include transform(translateY(-50%))}
+
+		.line-2 {
+			margin: 30vh 0;
+			width: 100%;
+			opacity: 0;
+
+			p {
+				font-weight: 300;
+				font-size: $font-size * 1.5;
+			}
+
+			p, h2 {
+				// Must set this width on inner elements rather than .line-2 or we get a ScrollMagic bug
+				width: 95%;
+				max-width: $main-max-width;
+				margin: auto;
+			}
+		}
+	}
+
+	#screen2 {
+		$font-size-unit: 1.2vw;
+
+		z-index: 2;
+		background: white;
+		padding: 0 2.5vw;
+		@include display-flex;
+
+		#bottom-helper {
+			position: absolute;
+			bottom: 0;
+		}
+
+		.flex-container {
+			width: 100%;
+			margin: auto;
+			max-width: $main-max-width;
+			padding: $font-size*6 0 $font-size*7 0;
+		}
+
+		.content {
+			@include display-flex;
+			width: 100%;
+			@include justify-content(space-between);
+
+			&>div {width: 30%}
+		}
+		
+
+		h2 {
+			color: black;
+			font-size: $font-size-unit * 3;
+			font-weight: 400;
+			opacity: 0;
+		}
+
+		h3 {
+			font-weight: 300;
+			color: $red;
+			font-size: $font-size-unit * 2;
+			margin-bottom: $font-size * 1.5;
+			opacity: 0;
+		}
+
+		.disc {
+			opacity: 0;
+			@include transform(rotateY(180deg));
+			border-radius: 50%;
+			width: 80%;
+			padding-top: 80%;
+			margin: 0 auto;
+			position: relative;
+			background: linear-gradient(-45deg, #eaeaea 20%,#d4d4d4, #c7c7c7);
+
+			.bevel {
+				@include center;
+				border-radius: 50%;
+				width: 90%;
+				padding-top: 90%;
+				background: white;
+				overflow: hidden;
+			}
+
+			.inner {
+				@include center;
+				width: 100%;
+			}
+
+			.inner-shadow {
+				border-radius: 50%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				padding-top: 100%;
+				box-shadow: inset 1px 1px 5px rgba(0,0,0,.5);
+				background: radial-gradient(ellipse at 35% 35%, rgba(255,255,255,.75) 0%,rgba(255,255,255,0) 50%);
+			}
+		}
+
+		.shadow {
+			width: 80%;
+			padding-top: 15%;
+			margin: -8% auto;
+			position: relative;
+			z-index: -1;
+			background: radial-gradient(ellipse at center, rgba(0,0,0,.25) 0%,rgba(0,0,0,0) 50%);
+			opacity: 0;
+		}
+
+		#allies svg {
+			width: 200%;
+			margin-left: -29%;
+		}
+
+		#policies svg {
+			width: 90%;
+			margin-left: -3%;
+		}
+
+		#appearance {
+			.inner {
+				@include center(true, false);
+				top: 0;
+			}
+		}
+
+		#male, #female {width: 100%}
+
+		#female {
+			position: absolute;
+			left: 110%;
+			top: 0;
+		}
+
+		#female-container {
+			width: 100%;
+			padding-top: 100%;
+			position: absolute;
+			top: 0;
+			left: -110%;
+			background: white;
+			overflow: hidden;
+		}
+
+		#blinds {
+			@include center(true, false);
+			left: -10%;
+			top: 0;
+			width: 4px;
+			padding-top: 100%;
+			background: #333;
+		}
+
+	}
+	
+	#Donkey_1_ {display: none}
+	#Top_Elephant {fill: #1000C0}
+	#Bottom_Elephant {fill: #E10000}
+
+	#screen3 {
+		z-index: 9;
+		height: 100vh;
+		margin-top: -10px; // the translateY that occurs to shift the gradient upwards when entering screen4 can reveal a dark horizontal band when reversing because screen3 & 4 don't stay totally flush. This creates a small overlap that solves this issue.
+		overflow: visible;
+		background: linear-gradient(to bottom, #fff 25%, rgba(255,255,255,0) 100%);
+		pointer-events: none;
+	}
+
+	#screen4 {
+		height: 100vh;
+
+		a {
+			display: none;
+			@include center(true, true, fixed);
+			@extend %link-button;
+			font-size: $font-size * 3;
+			border-radius: 10px;
+			padding: 15px 22px;
+			white-space: nowrap;
+
+			&:after {
+				@extend .fa;
+				content: '\f061';
+				font-size: $font-size * 2;
+				vertical-align: top;
+				margin: 16px 0 0 10px;
+			}
+		}
+	}
+
+	@media (min-width: 1340px) {
+		#screen2 {
+			h2 {font-size: $font-size * 3}
+			h3 {font-size: $font-size * 2}
+		}
+	}
+
+	@media (max-width: 800px) {
+		#screen1 {height: auto}
+
+		#screen2 {
+			h2 {font-size: $font-size * 3}
+			h3 {font-size: $font-size * 2}
+			
+			.content {
+				@include flex-direction(column);
+
+				&>div {
+					width: 60%;
+					margin: 0 auto 10% auto;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 600px) {
+		#screen2 .content > div {width: 80%}
+	}
+
+	@media (max-width: 400px) {
+		#screen2 .content > div {width: 100%}
+	}
+
+	@media (max-width: 460px) {
+		$font-size-unit: 6vw;
+
+		#screen1 {
+			
+			.line-1 {
+				width: 100%;
+				margin: 0 auto;
+				font-size: $font-size-unit * 2;
+			}
+			
+			.line-2 {
+
+				p, h2 {width: 95%}
+
+				h2 {font-size: $font-size-unit * 2}
+				p {font-size: $font-size-unit}
+			}
+		}
+	}	
+}

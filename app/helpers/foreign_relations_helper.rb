@@ -1,0 +1,2 @@
+module ForeignRelationsHelper
+end

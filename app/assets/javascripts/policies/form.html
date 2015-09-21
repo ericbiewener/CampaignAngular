@@ -1,0 +1,46 @@
+<div id="content">
+	<ui-ajax-throbber name="main" visible="true" ng-if="!isNew"></ui-ajax-throbber>
+
+	<h2>{{isNew ? 'Create New Policy' : 'Edit Policy'}}</h2>
+	<form ui-ajax-disable="save()">
+		<div class="field" ng-class="{error:errors.title}" >
+			<input type="text" placeholder="Title" ng-model="policy.title" ui-autofocus="{{isNew === true}}">
+			<div class="error-tooltip" ng-if="errors.title">
+				<div class="inner">
+					<div class="tooltip-point"></div>
+					<div class="text">Title {{errors.title}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="field" ng-class="{error:errors.description}">
+			<textarea placeholder="Description" rows="10" ng-model="policy.description" ui-autosize-textarea></textarea>
+			<div class="error-tooltip" ng-if="errors.description">
+				<div class="inner">
+					<div class="tooltip-point"></div>
+					<div class="text">Description {{errors.description}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="field" ng-class="{error:errors.area}">
+			<div class="select-wrapper">
+				<select ng-model="policy.area" placeholder="Policy Area">
+					<option value="" disabled>Select a Policy Area</option>
+					<option>Economy</option>
+					<option>Health</option>
+					<option>Education</option>
+					<option>Environment</option>
+					<option>National Security</option>
+					<option>Space!</option>
+				</select>
+			</div>
+			<div class="error-tooltip area" ng-if="errors.area">
+				<div class="inner">
+					<div class="tooltip-point"></div>
+					<div class="text">Policy Area {{errors.area}}</div>
+				</div>
+			</div>
+		</div>
+		<button type="submit">{{isNew ? 'Create' : 'Save'}}</button>
+		<button type="button" class="danger" ng-if="!isNew" ui-ajax-disable="delete()">Delete</button>
+	</form>
+</div>

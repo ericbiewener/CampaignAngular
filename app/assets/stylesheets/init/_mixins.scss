@@ -1,0 +1,113 @@
+@mixin center($horizontal: true, $vertical: true, $position: absolute, $additional_transform: '') {
+	position: $position;
+	$translateX: 0;
+	$translateY: 0;
+	
+	@if $horizontal {
+		left: 50%;
+		$translateX: -50%;
+	}
+
+	@if $vertical {
+		top: 50%;
+		$translateY: -50%;
+	}
+
+	@include transform(translate($translateX, $translateY) unquote($additional_transform));
+}
+
+@mixin ellipse($width, $height: $width) {
+	width: $width;
+	height: $height;
+	border-radius: 50%;
+}
+
+@mixin button-color($color) {
+	background-image: linear-gradient(to bottom, $color, darken($color, 5%));
+
+	&:hover, &:active {
+		background-image: linear-gradient(to bottom, darken($color, 5%), darken($color, 10%));
+	}
+
+	$shadow-active: inset 0 0 10px 0 rgba(0, 0, 0, .75);
+	$outline-focus: 0 0 5px 2px rgba($color, .75);
+	
+	&:active {box-shadow: $shadow-active}
+	&:focus {box-shadow: $outline-focus}
+	&:active:focus {box-shadow: $shadow-active, $outline-focus}
+}
+
+@mixin inline-space-fix($descendents, $font-size) {
+	font-size: 0px;
+	#{$descendents} {font-size: $font-size}
+}
+
+@mixin drawer-shadow($direction: down) {
+	@if $direction == down {
+		box-shadow: 0 5px 5px rgba(0, 0, 0, .25);
+	}
+	@else if $direction == up {
+		box-shadow: 0 -5px 5px rgba(0, 0, 0, .25);
+	}
+	@else if $direction == left {
+		box-shadow: -5px 0 5px rgba(0, 0, 0, .25);
+	}
+	@else {
+		box-shadow: 5px 0 5px rgba(0, 0, 0, .25);
+	}
+}
+
+@mixin state-color-change($color, $property: background-color, $change: 10%) {
+	#{$property}: $color;
+	&:hover {#{$property}: darken($color, $change)}
+	&:active {#{$property}: darken($color, $change * 2)}
+}
+
+@mixin border-triangle($size, $color, $direction) {
+	@if $direction == down {
+		border-width: $size $size 0 $size;
+		border-color: $color transparent transparent transparent;
+	}
+	@else if $direction == up {
+		border-width: 0 $size $size $size;
+		border-color: transparent transparent $color transparent;
+	}
+	@else if $direction == left {
+		border-width: $size $size $size 0;
+		border-color: transparent $color transparent transparent;
+	}
+	@else {
+		border-width: $size 0 $size $size;
+		border-color: transparent transparent transparent $color;
+	}
+}
+
+@mixin text-arrow($direction: right) {
+	$font-size: 12px;
+	$vertical-align: 1px;
+	$margin: 5px;
+
+	@if $direction == right {
+		&:after {
+			@extend .fa;
+			content: '\f061';
+			margin-left: $margin;
+			font-size: $font-size;
+			vertical-align: $vertical-align;
+		}
+	}
+	@else {
+		&:before {
+			@extend .fa;
+			content: '\f060';
+			margin-right: $margin;
+			font-size: $font-size;
+			vertical-align: $vertical-align;
+		}
+	}
+}
+
+@mixin last-child($property, $amount, $last-child-amount: 0) {
+	#{$property}: $amount;
+	&:last-child {#{$property}: $last-child-amount}
+}

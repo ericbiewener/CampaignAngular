@@ -1,0 +1,45 @@
+$error-color: #CC5252;
+$tooltip-point-size: 5px;
+$tooltip-width: 200px;
+
+.error-tooltip {
+	@include center(false, true);
+	left: 100%;
+	width: $tooltip-width;
+	color: white;
+	font-size: $small-font;
+
+	.inner {
+		position: relative;
+		text-align: center;
+		margin-left: $tooltip-point-size + 2px;
+		background: $error-color;
+		padding: $even-padding-14px;
+	}
+}
+
+.tooltip-point {
+	@include center(false, true);
+	left: -$tooltip-point-size;
+	border-style: solid;
+	@include border-triangle($tooltip-point-size, $error-color, left);
+}
+
+@mixin tooltip-responsive {
+	position: static;
+	@include transform(none);
+	margin: 0 auto;
+
+	.inner {margin: $tooltip-point-size + 2px 0 0 0}
+	.tooltip-point {
+		@include center(true, false);
+		top: -$tooltip-point-size;
+		@include border-triangle($tooltip-point-size, $error-color, up);
+	}
+}
+
+@media (max-width: 600px) {
+	.error-tooltip {
+		@include tooltip-responsive;
+	}
+}

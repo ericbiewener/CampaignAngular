@@ -1,0 +1,208 @@
+$suit-color: #394259;
+$tie-color: #FF0000;
+$shoes-color: #000;
+$shirt-color: #EAEAEA;
+$skin-color: #F1BC83;
+
+.appearances {
+	$control-header-margin-bottom: 5px;
+	// @include user-select(none);
+
+	main {
+		padding-left: $font-size;
+		padding-right: $font-size;
+		width: 100%;
+		max-width: 700px;
+	}
+	
+	#controls {float: right}
+	#control-bg {display: none}
+	.throbber {top: 30vh}
+	
+	label {
+		@extend a;
+		display: inline-block;
+		color: black;
+		color: #808080;
+	}
+	
+	h3+button {display: none}
+	
+	h3, #gender {
+		margin: $font-size 0 $control-header-margin-bottom 0;
+		padding-top: $font-size;
+		border-top: $light-border;
+	}
+	
+	#colors {
+		
+		h3 {margin-bottom: $control-header-margin-bottom + 3px}
+
+		.control-wrapper {
+			label {text-transform: lowercase}
+
+			button {
+				$size: $font-size * 1.5 + 1;
+				@include ellipse($size, $size);
+				max-width: $size;
+				border: 2px solid #ccc;
+				background: white;
+				margin: 2px 5px 0 0;
+				padding: 0;
+			}
+		}
+		label {margin-top: $font-size/4}
+
+		#skin-color {background: $skin-color}
+		#hair-color {background: black}
+		#suit-color {background: $suit-color}
+		#shirt-color {background: #EAEAEA}
+		#tie-color {background: red}
+		#shoes-color {background: black}
+		#skin-color {background: $skin-color}
+		#stockings-color {background: #ccc}
+	}
+
+	.female #baldness {display: none}
+}
+
+#button-color-wrapper-stockings { display:none }
+
+#politician-svg {
+	float: left;
+
+	#Male_Heavy, #Female_Thin, #Female_Heavy { display: none; }
+	#Jacket_Arm_Left, #Jacket_Arm_Right { fill: $suit-color; }
+	#Jacket_Fold path { fill: lighten($suit-color, 5%); }
+	#Pants { fill: darken($suit-color, 3%);	}
+	#Knot_1_ { fill: $tie-color; }
+	#Tie { fill: darken($tie-color, 5%); }
+	#Shoes path {	fill: $shoes-color;	}
+	#Shirt_1_, #Cuff_Left, #Cuff_Right { fill: $shirt-color; }
+	#Collar_10_ path { fill: lighten($shirt-color, 10%) }
+	#Stockings path { fill: #CCC }
+	#Hair_Male_Bald, #Hair_Male_Bald_Final, #Hair_Female_Normal_1_ { display: none }
+
+	&.Hair_Male_Bald-percentage-1 {
+		#Hair_Male_Bald_Final { display: inline }
+		#Hair_Male_Normal { display: none }
+
+		&.morph-start.morph-state-Hair_Male_Bald,
+		&.morph-state-Hair_Female_Normal_1_,
+		&.morph-state-Female_Heavy {
+			#Hair_Male_Bald_Final { display: none }
+			#Hair_Male_Normal { display: inline }
+		}
+	}
+}
+
+@media (max-width: 615px) {
+	.appearances {
+		$controls-height: 47px;
+		$controls-bg-color: #f2f2f2;
+
+		#flash-messages {top: $main-menu-height + $controls-height}
+
+		main {padding: $main-menu-height 0 0 0}
+
+		#controls {
+			@include display-flex;
+			float: none;
+			width: 100%;
+			height: $controls-height;
+			background: $controls-bg-color;
+			position: relative;
+			@include drawer-shadow();
+			z-index: 2;
+		}
+
+		#gender, #body, #baldness, #colors {margin: auto}
+		#gender {padding-top: 0}
+
+		h3 {
+			display: none;
+
+			&+button {
+				display: block;
+				
+			}
+		}
+
+		.control-wrapper {
+			display: none;
+			position: absolute;
+			top: $controls-height;
+			left: 0;
+			background: $controls-bg-color;
+			width: 100%;
+			padding: $even-padding-16px;
+			z-index: 1;
+			@include drawer-shadow();
+			text-align: center;
+		}
+
+		.slider {display: inline-block}
+
+		#colors .control-wrapper {
+			@include justify-content(space-between);
+			label {display: block}
+		}
+
+		%selected-button {
+			h3+button {@include button-color($blue3)}
+		}
+
+		.show-body #body {
+			@extend %selected-button;
+			.control-wrapper {display: block}
+		}
+		
+		.show-baldness #baldness {
+			@extend %selected-button;
+			.control-wrapper {display: block}
+		}
+		
+		.show-colors #colors {
+			@extend %selected-button;
+			.control-wrapper {@include display-flex}
+		}
+
+		$save-button-position: 100px;
+
+		#save {
+			position: absolute;
+			right: 54px;
+			top: $save-button-position;
+		}
+
+		#politician-svg {
+			float: none;
+			width: 100%;
+			margin-top: $font-size * 2;
+		}
+
+		.show-body, .show-baldness {
+			$offset: 39px;
+			#politician-svg {margin-top: $font-size * 2 + $offset}
+			#save {top: $save-button-position + $offset}
+		}
+
+		.show-colors {
+			$offset: 65px;
+			#politician-svg {margin-top: $font-size * 2 + $offset}
+			#save {top: $save-button-position + $offset}
+		}
+
+		.female #baldness {
+			display: block;
+			visibility: hidden;
+			@include order(9);
+		}
+	}
+}
+
+@media (max-width: 375px) {
+	.appearances {
+		button, #colors label {font-size: 13px}	
+	}
+}

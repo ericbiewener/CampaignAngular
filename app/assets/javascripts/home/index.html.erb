@@ -1,0 +1,69 @@
+<div id="bg">
+	<div id="sky" class="start"></div>
+	<div id="landscape"></div>
+</div>
+
+<%= inline_svg 'down-arrow.svg', id: 'start-arrow' %>
+
+<section id="screen1">
+	<h2 class="line-1">A new type of political campaign.<br>A new type of democracy.</h2>
+	<div class="line-2">
+		<h2>Introducing the crowd-sourced politician.</h2>
+		<p>Maecenas eget pharetra tortor. Quisque lorem mauris, fringilla non ante eu, cursus commodo velit. In arcu odio, finibus eget lectus a, rutrum venenatis tortor. Vestibulum id orci efficitur, maximus augue sed, congue justo. Nam placerat nulla vel convallis venenatis. In lobortis finibus nulla ut pretium. Donec facilisis rhoncus augue, vitae.</p>
+	</div>
+</section>
+
+<section id="screen2">
+	<div id="bottom-helper"></div>
+	<div class="flex-container">
+		<h2><div class="fade-out">You decide.</div></h2>
+		<div class="content">
+			<div id="policies">
+				<h3><div class="fade-out">My policies...</div></h3>
+				<div class="disc" donkey-morph="svgAnimator">
+					<div class="bevel">
+						<div class="inner">
+							<%= inline_svg 'donkey-elephant.svg' %>
+						</div>
+						<div class="inner-shadow"></div>
+					</div>
+				</div>
+				<div class="shadow-fade-out"><div class="shadow"></div></div>
+			</div>
+			<div id="allies">
+				<h3><div class="fade-out">...my allies</div></h3>
+				<div class="disc" map-color>
+					<div class="bevel">
+						<div class="inner">
+							<%= inline_svg 'world-map-cleaned.svg', id: 'map' %>
+						</div>
+						<div class="inner-shadow"></div>
+					</div>
+				</div>
+				<div class="shadow-fade-out"><div class="shadow"></div></div>
+			</div>
+			<div id="appearance">
+				<h3><div class="fade-out">...and even my appearance.</div></h3>
+				<div class="disc" politician-blinds>
+					<div class="bevel">
+						<div class="inner">
+							<%= inline_svg 'politician-male-grayscale.svg', id: 'male' %>
+							<div id="female-container">
+								<%= inline_svg 'politician-female.svg', id: 'female' %>
+							</div>
+							<div id="blinds"></div>
+						</div>
+						<div class="inner-shadow"></div>
+					</div>
+				</div>
+				<div class="shadow-fade-out"><div class="shadow"></div></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="screen3"></section>
+
+<section id="screen4">
+	<a href="/#/register">Get Started</a>
+</section>

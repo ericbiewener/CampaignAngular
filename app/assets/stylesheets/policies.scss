@@ -1,0 +1,277 @@
+.policies.index #content {@include display-flex}
+
+#policy-area-links {
+	@include display-flex;
+	@include justify-content(space-between);
+	margin-bottom: $font-size * 3;
+
+	h2 {
+		text-align: center;
+		font-size: 2vw;
+	}
+
+	a {
+		color: #999;
+		&.active {color: black}
+	}
+}
+
+#show-popular {display: none}
+
+#create-new-policy {
+	display: inline-block;
+	@include transform(translateY(-$font-size * 3));
+	@include text-arrow;
+}
+
+#policy-selector {display: none}
+
+.policy {
+	$avatar-size: $font-size * 5.5;
+	$comment-avatar-size: $font-size * 3.5;
+	margin-bottom: $font-size * 3;
+	clear: both;
+
+	.main {min-height: $avatar-size}
+
+	h3 {
+		font-size: $font-size * 1.375;
+		a {color: black; display: inline}
+	}
+
+	.avatar {
+		width: $avatar-size;
+		height: $avatar-size;
+		float: left;
+		margin: 3px $font-size 0 0;
+	}
+
+	.meta-data {
+		color: #999;
+		@include display-flex;
+		@include flex-wrap(wrap);
+
+		a, div {
+			color: #999;
+			margin: auto $font-size auto 0;
+		}
+
+		.voting {
+			@include display-flex;
+			@include flex-wrap(wrap);
+		}
+	}
+
+	.vote-up {
+		&:before {
+			@extend .fa, .fa-star;
+			margin-right: 2px;
+		}
+		&:after {content: 'Great!'}
+		&:hover, &.selected {color: green !important}
+		&:active {color: darken(green, 10%) !important}
+	}
+
+	.vote-down {
+		&:before {
+			@extend .fa, .fa-ban;
+			margin-right: 2px;
+		}
+		&:after {content: 'Stupid!'}
+		&:hover, &.selected {color: #c00 !important}
+		&:active {color: darken(#c00, 10%) !important}
+	}
+
+	.vote-up, .vote-down {
+		&.clicked:not(.selected):not(:active) {color: #999 !important}
+	}
+
+	.vote-score {font-weight: bold}
+
+	.view-all {
+		height: $font-size;
+		margin: $font-size/2 0;
+		font-size: $small-font;
+	}
+
+	.comments {
+		clear: both;
+		font-size: $small-font;
+		color: #808080;
+	}
+
+	.comment {
+		min-height: $comment-avatar-size;
+		margin-bottom: $font-size;
+		@include display-flex;
+
+		.avatar {
+			width: $comment-avatar-size;
+			height: $comment-avatar-size;
+			margin: 1px $font-size * 0.75 0 0;
+			float: none;
+		}
+
+		.content {@include flex(1)}
+
+		.meta-data {
+			a, span {
+				font-size: $small-font;
+				&:after {margin: 0 10px}
+			}
+		}
+	}
+
+	textarea {font-size: $small-font; margin-top:3px}
+
+	button[type=submit] {
+		display: block;
+		font-size: $small-font;
+		margin-top: $font-size/4;
+		padding: $even-padding-14px;
+	}
+}
+
+#policy-list {
+	padding-right: $font-size * 1.5;
+	width: 60%;
+	@include order(1);
+}
+
+#policy-rankings {
+	padding-left: $font-size * 1.5;
+	width: 40%;
+	@include order(2);
+
+	.vote-type {
+		@include display-flex;
+
+		h4 {
+			font-size: $font-size;
+			&:first-child {margin-right: $font-size * 2}
+
+			a {
+				color: #999;
+				&.active {color: black}
+			}
+		}
+	}
+}
+
+#close-popular {display: none}
+
+.vote-score {
+	&.positive {
+		color: green !important;
+		&:before{content: '+'}
+	}
+	&.negative {color: #c00 !important}
+}
+
+.policies.show main {max-width: 900px}
+
+$policy-area-form-selector-width: 181px;
+
+.policies.form {
+
+	main {
+		padding-left: 200px;
+		padding-right: 200px;
+		padding-bottom: $font-size * 2;
+		max-width: 1000px;
+	}
+
+	.select-wrapper {width: $policy-area-form-selector-width}
+	.error-tooltip.area {left: $policy-area-form-selector-width}
+}
+
+@media (max-width: 850px) {
+	#policy-area-links h2 {display: none}
+	#policy-selector {display: block}
+	#create-new-policy {@include transform(translate(200px, -$font-size * 5 + 2px))}
+
+	.policies.form {
+		main {
+			padding-left: 40px;
+			padding-right: 40px;
+			max-width: 100%;
+		}
+
+		.error-tooltip {
+			@include tooltip-responsive;
+
+			&.area {margin-left: ($policy-area-form-selector-width - $tooltip-width)/2}
+		}
+	}
+}
+
+@media (max-width: 750px) {
+	.policies.index #content {display: block}
+
+	#policy-list {
+		width: 100%;
+		padding-right:0;
+	}
+
+	#policy-area-links {@include justify-content(flex-start)}
+
+	#show-popular {
+		display: block;
+		margin: auto 0 auto $font-size * 1.5;
+	}
+
+	#policy-rankings {
+		display: none;
+		width: 100%;
+		margin-bottom: $font-size * 3;
+		padding-left: 0;
+		transition: left 250ms;
+
+		&.show {display: block}
+
+		tr:last-child {border-bottom: $light-border}
+	}
+
+	#create-new-policy {
+		@include transform(translate(0, -$font-size * 1.5));
+		margin-bottom: $font-size/2;
+	}
+}
+
+@media (max-width: 400px) {
+	#policy-area-links {display: block}
+
+	#show-popular {
+		text-align: center;
+		margin-top: $font-size;
+	}
+}
+
+@media (min-width: 1800px) {
+	#policy-area-links h2 {font-size: $font-size * 2}
+}
+
+@media (max-width: 475px) {
+	.policy {
+		
+		.meta-data {
+			a, div {
+				margin-right: $font-size/2;
+			}
+		}
+
+		.vote-up {
+			padding-right: 6px;
+			padding-left: 6px;
+			&:before {margin-right: 0}
+			&:after {content: none}
+		}
+
+		.vote-down {
+			padding-right: 6px;
+			padding-left: 6px;
+			&:before {margin-right: 0}
+			&:after {content: none}
+		}
+	}
+}

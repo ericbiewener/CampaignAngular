@@ -1,0 +1,45 @@
+.throbber {
+	$size: 10px;
+	
+	width: $size * 4;
+	height: $size;
+	@include center(true, false);
+	top: 10vh;
+
+	div {
+		@include ellipse($size);
+		background: #999;
+		position: absolute;
+		@include animation(grow .3s ease-in-out infinite alternate);
+	}
+
+	.a {left: 0}
+
+	.b {
+		@include animation-delay(.15s);
+		left: 50%;
+		margin-left: -$size/2;
+	}
+	.c {
+		@include animation-delay(.3s);
+		right: 0;
+	}
+
+	@include keyframes(grow) {
+		0% {@include transform(scale(1)); opacity: .5}
+		100% {@include transform(scale(1.25)); opacity: 1}
+	}
+}
+
+.shroud {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: white;
+	z-index: 96;
+	display: none;
+
+	&.visible {display: block}
+}

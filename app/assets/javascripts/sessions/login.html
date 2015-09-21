@@ -1,0 +1,14 @@
+<h2>Log In</h2>
+<form ng-submit="login()">
+	<div class="field">
+		<input type="text" placeholder="Username or Email" ui-autofocus ng-model="username_or_email" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+	</div>
+	<div class="field">
+		<input type="password" placeholder="Password" ng-model="password">
+	</div>
+	<div class="field">
+		<input type="checkbox" id="remember" ng-model="remember"><label for="remember">Remember me</label>
+	</div>
+	<button type="submit">Log In</button>
+	<a class="forgot-password" href="/#/password-reset" ng-if="!isNew">Forgot your password?</a>
+</form>

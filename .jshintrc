@@ -1,0 +1,20 @@
+// See options https://github.com/jshint/jshint/blob/master/examples/.jshintrc
+
+{
+  "unused": "vars",
+  "laxbreak": "true",
+  "newcap": false,
+  "globals": {
+    "confirm": false
+    ,"angular": false
+    ,"app": false
+    ,"$": false
+    ,"TweenMax": false
+    ,"tinycolor": false
+    ,"limitNumber": false
+    ,"getDistance": false
+    ,"getMidpoint": false
+    ,"arrayUnique": false
+    ,"capitalize": false
+  }
+}

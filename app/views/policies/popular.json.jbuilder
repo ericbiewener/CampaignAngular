@@ -1,0 +1,1 @@
+json.partial! 'top_policies', top_policies: @top_policies

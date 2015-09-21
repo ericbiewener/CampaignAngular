@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-strict-di>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>CampaignAngular</title>
+	<%= favicon_link_tag 'favicon.png' %>
+	<%= stylesheet_link_tag    'application' %>
+	<%= javascript_include_tag 'application' %>
+</head>
+<body ng-class="{authenticated: storage.username !== undefined}" class="{{bodyClass}}">
+
+<div id="flash-messages" ng-cloak>
+	<div id="flash-error" ng-show="flash.error"><div class="inner">{{flash.error}}</div></div>
+	<div id="flash-notice" ng-show="flash.notice"><div class="inner">{{flash.notice}}</div></div>
+	<div id="flash-success" ng-show="flash.success"><div class="inner">{{flash.success}}</div></div>
+</div>
+
+<nav id="main-menu" ng-cloak ng-class="{open: isOpen}">
+	<div class="inner">
+		<div class="background-bar"></div>
+		<a href="/#/" id="logo"><div class="inner"></div></a>
+		<div id="hamburger" ng-click="isOpen = !isOpen">
+			<div class="inner">
+				<span class="top"></span>
+				<span class="mid1"></span>
+				<span class="mid2"></span>
+				<span class="bottom"></span>
+			</div>
+		</div>
+		<div id="menu-links" ng-click="isOpen = false">
+			<div class="logged-in" ng-if="storage.id">
+				<a class="main-menu-policies" href="#/policies" ui-anchor><div>Policies</div></a>
+				<a class="main-menu-foreign-relations" href="#/foreign-relations" ui-anchor><div>Foreign Relations</div></a>
+				<div class="spacer"></div>
+				<a class="main-menu-appearance" href="#/appearance" ui-anchor><div>Appearance</div></a>
+				<a class="settings" ng-class="{active: isProfile}" href="/#/users/{{storage.id}}"><div>My Account</div></a>
+				<a ng-click="logout()" href><div>Log Out</div></a>
+			</div>
+			<div class="logged-out" ng-if="!storage.id">
+				<div class="spacer"></div>
+				<a class="main-menu-login" href="#/login"><div>Log In</div></a>
+				<div class="spacer middle"></div>
+				<a class="main-menu-register" href="#/register"><div>Sign Up</div></a>
+				<div class="spacer"></div>
+			</div>
+		</div>
+
+	</div>
+	<a id="settings" href="/#/users/{{storage.id}}" ng-if="storage.id"></a>
+</nav>
+
+<main id="main" ng-cloak ng-view></main>
+
+</body>
+</html>

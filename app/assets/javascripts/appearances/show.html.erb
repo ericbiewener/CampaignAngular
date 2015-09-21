@@ -1,0 +1,45 @@
+<div  class="{{visibleControl}} {{switch.off ? 'female' : 'male'}}">
+	<ui-ajax-throbber name="main" visible="true"></ui-ajax-throbber>
+
+	<div id="controls">
+
+		<md-slider flex min="0" max="255" ng-model="color.red" aria-label="red" id="red-slider" class=""></md-slider>
+
+		<button id="save" ui-ajax-disable="save(val)">Save</button>
+		
+		<div id="gender">
+			<ui-switch info="switch" labels="Male|Female"></ui-switch>
+		</div>
+
+		<div id="body">
+			<h3>Body Type</h3>
+			<button ng-click="visibleControl = 'show-body'">Body Type</button>
+			<div class="control-wrapper">
+				<ui-slider info="body" labels="Thin|Heavy"></ui-slider>
+			</div>
+		</div>
+
+		<div id="baldness">
+			<h3>Hair</h3>
+			<button ng-click="visibleControl = 'show-baldness'">Hair</button>
+			<div class="control-wrapper">
+				<ui-slider info="hair" labels="Full|Bald"></ui-slider>
+			</div>
+		</div>
+
+		<div id="colors">
+			<h3>Colors</h3>
+			<button ng-click="visibleControl = 'show-colors'">Colors</button>
+			<div class="control-wrapper">
+				<% ['skin', 'hair', 'suit', 'shirt', 'tie', 'shoes', 'stockings'].each do |v| %>
+					<div id="button-color-wrapper-<%= v %>">
+						<button id="<%= v %>-color" style="width:100px"></button><label id="<%= v %>-color-label"><%= v %></label>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<%= inline_svg('politician.svg', id: 'politician-svg') %>
+
+</div>

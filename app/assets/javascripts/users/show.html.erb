@@ -1,0 +1,36 @@
+<div id="content">
+	<ui-ajax-throbber name="main" visible="true"></ui-ajax-throbber>
+
+	<avatar-no-link user="user"></avatar-no-link>
+	<h2>{{user.username}}</h2>
+	<div class="joined">Joined: {{user.created_at | date:'MMM d, yyyy'}}</div>
+	<div class="edit" ng-if="storage.id === user.id"><a href="#/users/{{user.id}}/edit">Edit your profile</a></div>
+
+	<div class="content">
+
+		<div class="policies" ng-if="policies.length > 0">
+			<h4>Proposed Policies</h4>
+			<table class="policy-table">
+				<tr ng-repeat="policy in policies" ng-include="'policies/_policy_table.html'"></tr>
+			</table>
+			<a ng-click="showMorePolicies()" ng-show="morePolicies">More</a>
+		</div>
+
+		<div class="liked" ng-if="liked.length > 0">
+			<h4>Liked Policies</h4>
+			<table class="policy-table">
+				<tr ng-repeat="policy in liked" ng-include="'policies/_policy_table.html'"></tr>
+			</table>
+			<a ng-click="showMoreVoted(true)" ng-show="moreLiked">More</a>
+		</div>
+
+		<div class="disliked" ng-if="disliked.length > 0">
+			<h4>Disliked Policies</h4>
+			<table class="policy-table">
+				<tr ng-repeat="policy in disliked" ng-include="'policies/_policy_table.html'"></tr>
+			</table>
+			<a ng-click="showMoreVoted(false)" ng-show="moreDisliked">More</a>
+		</div>
+
+	</div>
+</div>

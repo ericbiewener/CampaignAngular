@@ -1,0 +1,186 @@
+$main-menu-color: rgba($blue1, .9);
+$hamburger-height: 28px;
+$hamburger-bar-height: 4px;
+
+.policies .main-menu-policies,
+.foreign-relations .main-menu-foreign-relations,
+.appearances .main-menu-appearance,
+.login .main-menu-login,
+.users .main-menu-register {@extend .active}
+
+#main-menu {
+	background: $main-menu-color;
+	text-transform: uppercase;
+	font-size: 14px;
+	height: $main-menu-height;
+	position: fixed;
+	z-index: 98;
+	top: 0;
+	width: 100%;
+
+	&>.inner {
+		max-width: $main-menu-width;
+		height: inherit;
+		margin: 0 auto;
+		position: relative;
+	}
+}
+
+#menu-links {
+
+	&> div {@include display-flex}
+
+	a {
+		color: white;
+		text-align: center;
+		height: $main-menu-height;
+		@include display-flex;
+
+		&:hover {
+			color: white !important;
+			background: darken($main-menu-color, 4%);
+		}
+
+		&.active {background: $blue2}
+
+		div {margin: auto}
+	}
+
+	a, .spacer {@include flex(1)}
+
+	.settings {display: none}
+}
+
+#logo {
+	background: asset-data-url('logo.svg') 0 0 / 100% 100%;
+	@include ellipse(75px);
+	@include center(true, false);
+	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	z-index: 99;
+	margin-top: 5px;
+
+	.inner { // necessary for additional box-shadow
+		@include ellipse(inherit);
+		&:hover {@include animation(glow 1s ease-in infinite alternate)}
+	}
+
+	@include keyframes(glow) {
+		0% {box-shadow: 0 0 25px rgba(255, 255, 255, 0)}
+		100% {box-shadow: 0 0 25px rgba(255, 255, 255, 1)}
+	}
+}
+
+$settings-size: 20px;
+
+#settings {
+	font-size: $settings-size;
+	@extend .fa, .fa-gear;
+	position: absolute;
+	top: ($main-menu-height - $settings-size)/2;
+	right: ($main-menu-height - $settings-size)/2;
+	color: white;
+	transition: text-shadow .35s;
+
+	&:hover {
+		color: white !important;
+		@include text-shadow(0 0 15px white);
+		@extend .fa-spin;
+	}
+}
+
+#hamburger {
+	display: none;
+	cursor: pointer;
+	@include center(false, true);
+	right: 14px;
+
+	&>.inner {
+		position: relative;
+		width: 38px;
+		height: $hamburger-height;
+	}
+
+	span {
+		display: block;
+		width: inherit;
+		height: $hamburger-bar-height;
+		background: white;
+		transition: transform 250ms, width 250ms, top 250ms;
+	}
+
+	.top {top: 0}
+	.bottom {top: $hamburger-height - $hamburger-bar-height}
+	.top, .bottom {@include center(true, false)}
+	.mid1, .mid2 {@include center}
+}
+
+.authenticated #login-register {display: none}
+
+@media (max-width: 600px) {
+
+	#main-menu.open {
+
+		#hamburger {
+			.mid1 {@include center(true, true, absolute, 'rotateZ(45deg)')}
+			.mid2 {@include center(true, true, absolute, 'rotateZ(-45deg)')}
+			.top, .bottom {width: 0; top: ($hamburger-height - $hamburger-bar-height) / 2}
+		}
+
+		#menu-links {
+			height: 280px;
+			display: block;
+		}
+	}
+
+	#logo {
+		$offset: 3px;
+		left: $offset;
+		top: $offset;
+		width: $main-menu-height - $offset * 2;
+		height: $main-menu-height - $offset * 2;
+		margin: 0;
+		@include transform(translate(0));
+	}
+
+	.authenticated {
+
+		#hamburger {display: block}
+
+		#menu-links {
+			position: absolute;
+			top: $main-menu-height;
+			left: 0;
+			height: 0;
+			display: none;
+			overflow: hidden;
+			width: 100%;
+			background: #5E5E5E;
+			@include drawer-shadow;
+			transition: height 250ms;
+
+			&> div {display: block}
+
+			a {
+				padding-left: 14px;
+				padding-right: 14px;
+				width: 100%;
+				text-align: left;
+
+				div {
+					margin-left: 0;
+				}
+			}
+
+			.spacer {display: none}
+			.settings {@include display-flex}
+		}
+	}
+	
+	.spacer.middle {display: none} // Needed only when not logged in
+
+	#settings {display: none}
+}
+
+@media (max-width: 900px) {
+	#settings {right: 5px}
+}

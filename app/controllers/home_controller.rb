@@ -1,0 +1,4 @@
+class HomeController < ApplicationController
+	skip_before_filter :authenticate_request
+	skip_before_filter :set_default_response_format_to_json
+end

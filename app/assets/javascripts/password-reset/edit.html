@@ -1,0 +1,19 @@
+<div id="content">
+	<ui-ajax-throbber name="main" visible="true"></ui-ajax-throbber>
+
+	<h2>Change Your Password</h2>
+
+	<avatar-no-link user="user"></avatar-no-link>
+	<h2>{{user.username}}</h2>
+
+	<form ui-ajax-disable="update()">
+		<div class="field" ng-class="{error:errors.password}">
+			<input type="password" placeholder="New Password" ng-model="password" ui-autofocus>
+			<div class="error-tooltip" ng-if="errors.password">
+				<ul><li ng-repeat="error in errors.password">{{error}}</li></ul>
+			</div>
+		</div>
+
+		<button type="submit">Save</button>
+	</form>
+</div>

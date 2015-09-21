@@ -1,0 +1,25 @@
+<ui-ajax-throbber name="main" visible="true"></ui-ajax-throbber>
+
+<div class="info">
+	<h4>Viewing total results from all users.</h4>
+	<a ng-href="/#/foreign-relations/{{storage.id}}">View/Edit my choices</a>
+</div>
+
+<div class="container">
+	<div class="svg-wrapper" fn-zoomable fn-draggable fn-pinchable>
+		<%= inline_svg('world-map.svg', id: 'world-map') %>
+	</div>
+</div>
+
+<ng-include src="'foreign-relations/controls.html'"></ng-include>
+
+<div class="hovered-country" ng-show="hoveredCountry">{{hoveredCountry}}<span ng-class="{positive: hoveredCountryVotes > 0}">{{hoveredCountryVotes}}</span></div>
+
+<div class="modal" ng-if="!storage.hideForeignRelationsIndex">
+	<div class="content">
+		<p>Drag the map around with your mouse.</p>
+		<p>Zoom in using the controls in the top-left, or with your mousewheel or trackpad.</p>
+		<p>If you are using a touchscreen device, you can also pinch to zoom in and out.</p>
+		<button ng-click="closeModal()">Got it!</button>
+	</div>
+</div>

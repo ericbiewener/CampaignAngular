@@ -1,0 +1,42 @@
+<nav id="policy-area-links">
+	<h2 ng-repeat="policyArea in policyAreas">
+		<a ng-click="$parent.currentPolicyArea = policyArea" ng-class="{active: policyArea === $parent.currentPolicyArea}">{{policyArea}}</a>
+	</h2>
+	<div class="select-wrapper" id="policy-selector">
+		<select ng-model="currentPolicyArea" placeholder="Policy Area">
+			<option value="" disabled>Select a Policy Area</option>
+			<option value="All Policies">All</option>
+			<option>Economy</option>
+			<option>Health</option>
+			<option>Education</option>
+			<option>Environment</option>
+			<option>National Security</option>
+			<option>Space!</option>
+		</select>
+	</div>
+	<a id="show-popular" ng-click="showingRanking = !showingRanking">{{showingRanking ? 'Hide' : 'View'}} Rankings</a>
+</nav>
+
+<a id="create-new-policy" href="/#/policies/new">Suggest a Policy</a>
+
+<div id="content">
+	<ui-ajax-throbber name="main" visible="true"></ui-ajax-throbber>
+
+	<div id="policy-rankings" ng-class="{show: showingRanking}">
+		<div class="vote-type">
+			<h4><a ng-click="showMostPopular(true)" ng-class="{active: showingMostPopular !== false}">Most Popular</a></h4>
+			<h4><a ng-click="showMostPopular(false)" ng-class="{active: showingMostPopular === false}">Least Popular</a></h4>
+		</div>
+		<div class="policy-table-wrapper">
+			<table class="policy-table">
+				<tr class="top-policy" ng-repeat="policy in top_policies" ng-include="'policies/_policy_table.html'"></tr>
+			</table>
+			<ui-ajax-throbber name="ranking"></ui-ajax-throbber>
+		</div>
+	</div>
+	
+	<div id="policy-list" infinite-scroll="loadNextPage()" infinite-scroll-distance="1" infinite-scroll-immediate-check="false">
+		<div class="policy" ng-repeat="policy in policies" ng-include="'policies/_policy.html'"></div>
+	</div>
+
+</div>

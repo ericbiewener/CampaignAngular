@@ -1,0 +1,158 @@
+// 16px & 14px Lato looks vertically squished. Adding .01 fixes this
+$font-size: 16.01px;
+$small-font: 14.01px;
+
+$main-max-width: 1520px;
+
+$blue1: #163d75;
+$blue2: #3d89c2;
+$blue3: #80C9FF;
+$main-menu-height: $font-size * 3.5;
+$main-menu-width: 1000px;
+
+$light-border: 1px solid #f2f2f2;
+$border-radius: 3px;
+
+$even-padding-16px: 8px 12px 10px 12px;
+$even-padding-14px: 5px 10px 6px 10px;
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+body {
+	font-family: Lato;
+	font-size: $font-size;
+	overflow-x: hidden;
+}
+
+p {
+	line-height: 1.5;
+	@include last-child(margin-bottom, $font-size);
+}
+
+main {
+	max-width: $main-max-width;
+	padding: 0 40px;
+	margin: 0 auto;
+	padding-top: $main-menu-height + $font-size * 3;
+	transition: opacity 1s;
+}
+
+h2 {
+	font-weight: 300;
+	font-size: $font-size * 3;
+	margin-bottom: $font-size * 2;
+}
+
+a {
+	color: $blue2;
+	&.active {cursor: default}
+	&:hover {color: $blue3 !important}
+	&:focus {outline-color: $blue3}
+	&:active {color: $blue2 !important}
+	&[href]:active {color: $blue3 !important}
+}
+
+.avatar {
+	@include ellipse(100px);
+	background: asset-data-url('avatar-blank.svg') center / cover;
+}
+
+.see-full-text {display: inline}
+
+
+.modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, .25);
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+
+	.content {
+		@include center(true, false);
+		top: $main-menu-height * 2;
+		background: white;
+		padding: $font-size * 2;
+		width: 600px;
+		box-shadow: 0 0 5px rgba(0, 0, 0, .25);
+		border-radius: $border-radius;
+	}
+
+	button {margin-top: $font-size/2}
+}
+
+#content {
+	position: relative;
+	min-height: 20vh; // prevents scrollbar from appearing when throbber is present but no content on initial page load
+}
+
+.cp-color-picker {z-index: 99}
+
+@media (max-width: 650px) {
+	.modal .content {width: 90%}
+	.no-mobile {display: none !important}
+}
+
+#flash-messages {
+	width: 100%;
+	position: fixed;
+	top: $main-menu-height;
+	left: 0;
+	z-index: 97;
+
+	.inner {
+		color: white;
+		padding: 10px;
+		width: $main-menu-width;
+		margin: 0 auto;
+	}
+}
+
+#flash-error {
+	background: #c00;
+}
+#flash-notice {
+	background: orange;
+}
+#flash-success {
+	background: green;
+}
+
+.top-page-links {margin-bottom: $font-size * 4;}
+
+.back-to {
+	float: left;
+	@include text-arrow(left);
+}
+
+.policy-table{
+	margin-top: 8px;
+
+	tr {
+		@include last-child(border-bottom, $light-border);
+		a {color: black}
+	}
+
+	td {padding: $even-padding-16px}
+	
+	.vote-score {
+		text-align: right;
+		padding-right: 10px;
+		vertical-align: top;
+		padding-right: 0;
+	}
+}
+
+.policy-table-wrapper {position: relative}
+
+
+@media (max-width: 400px) {
+	main {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	select {width: 100%}
+}

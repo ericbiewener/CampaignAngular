@@ -1,0 +1,43 @@
+<div class="main" move-see-more-link>
+	<avatar user="policy.user"></avatar>
+	<h3 ng-if="!isSinglePolicy"><a href="/#/policies/{{policy.id}}">{{policy.title}}</a></h3>
+	<h3 ng-if="isSinglePolicy">{{policy.title}}</h3>
+
+	<div class="meta-data">
+		<a class="username" ng-href="/#/users/{{policy.user.id}}">{{policy.user.username}}</a>
+		<a class="policy-area" ng-click="changePolicyArea(policy.area)">{{policy.area}}</a>
+		<div class="timestamp">{{policy.created_at | date:'MMM d'}}</div>
+		<div class="voting">
+			<a class="vote-up" ng-click="vote(policy, true)" ng-class="{selected: policy.user_vote}" ng-if="!policy.current_user_is_owner" ui-add-clicked-class></a>
+			<a class="vote-down" ng-click="vote(policy, false)" ng-class="{selected: policy.user_vote === false}" ng-if="!policy.current_user_is_owner" ui-add-clicked-class></a>
+			<div class="vote-score" ng-if="policy.cached_votes_score !== 0" ng-class="{positive: policy.cached_votes_score > 0, negative: policy.cached_votes_score < 0}">{{policy.cached_votes_score}}</div>
+		</div>
+		<a class="edit" ng-href="/#/policies/{{policy.id}}/edit" ng-if="policy.current_user_is_owner">Edit</a>
+	</div>
+
+	<div class="text" ng-bind-html="policy.description | limitString: 700:(policy.showFullText || isSinglePolicy) | trustHtml"></div>
+	<a class="see-full-text" href ng-click="policy.showFullText = true" ng-if="policy.description.length > 700 && !policy.showFullText && !isSinglePolicy">&nbsp;&nbsp;See&nbsp;more</a>
+</div>
+<div class="view-all"><a ng-if="policy.comment_count > 2 && policy.comments.length < policy.comment_count" ng-click="viewAllComments(policy)">View all {{policy.comment_count}} comments</a></div>
+
+<div class="comments">
+	<div class="comment" ng-repeat="comment in policy.comments" move-see-more-link>
+		<avatar user="comment.user"></avatar>
+		<div class="content">
+			<div class="text" ng-bind-html="comment.text | limitString: 200:comment.showFullText | trustHtml"></div>
+			<a class="see-full-text" href ng-click="comment.showFullText = true" ng-if="comment.text.length > 200 && !comment.showFullText"> See&nbsp;more</a>
+			<div class="meta-data">
+				<a class="username" ng-href="/#/users/{{comment.user.id}}">{{comment.user.username}}</a>
+				<span>{{comment.created_at | date:'MMM d'}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<form ui-ajax-disable="commentSave(policy)" class="comment">
+	<avatar-no-link user="storage"></avatar-no-link>
+	<div class="content">
+		<textarea placeholder="Add comment..." ng-model="policy.newComment" ui-autosize-textarea></textarea>
+		<button type="submit">Submit</button>
+	</div>
+</form>

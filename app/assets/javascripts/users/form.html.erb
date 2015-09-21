@@ -1,0 +1,48 @@
+<div id="content">
+	<ui-ajax-throbber name="main" visible="true" ng-if="!isNew"></ui-ajax-throbber>
+
+	<h2>{{isNew ? 'Sign Up' : 'Edit Your Profile'}}</h2>
+	<form ui-ajax-disable="save()">
+		
+		<div class="field" ng-if="!isNew">
+			<div ngf-drop ng-model="$parent.files" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="false" ngf-accept="'image/*'" ng-class="{changed: $parent.files.length > 0}">
+				<div class="img avatar" style="{{user.avatar ? 'background-image: url(' + user.avatar + ')' : ''}}" ngf-background="$parent.files[0]"></div>
+				<div class="msg">Drop image here.</div>
+			</div>
+			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+		</div>
+
+		<div class="field" ng-class="{error:errors.username}">
+			<input type="text" placeholder="Username" ng-model="user.username" ui-autofocus="{{isNew}}">
+			<div class="error-tooltip" ng-if="errors.username">
+				<div class="inner">
+					<div class="tooltip-point"></div>
+					<div class="text">Username {{errors.username}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="field" ng-class="{error:errors.email}">
+			<input type="text" placeholder="Email" ng-model="user.email">
+			<div class="error-tooltip" ng-if="errors.email">
+				<div class="inner">
+					<div class="tooltip-point"></div>
+					<div class="text">Email {{errors.email}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="field" ng-class="{error:errors.password}">
+			<input type="password" placeholder="Password" ng-model="user.password">
+			
+			<div class="error-tooltip" ng-if="errors.password">
+				<div class="inner">
+					<div class="tooltip-point"></div>
+					<div class="text">Password {{errors.password}}</div>
+				</div>
+			</div>
+
+		</div>
+
+		<button type="submit">{{isNew ? 'Sign Up' : 'Save'}}</button>
+		<button type="button" class="danger" ng-if="!isNew" ng-click="delete()">Delete Account</button>
+	</form>
+</div>
