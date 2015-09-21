@@ -56,6 +56,7 @@ angular.module('Policies', [])
 
 				PolicyAPI.index(params).success(function(resp){
 					angular.extend($scope, resp);
+					$scope.showingMostPopular = false;
 					$scope.$root.$broadcast('main-complete');
 				});
 			});
