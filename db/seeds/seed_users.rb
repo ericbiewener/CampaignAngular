@@ -1,7 +1,7 @@
 module SeedUsers
-	puts 'SeedUsers START'
+	puts 'SeedUsers START -- sampling 100'
 
-	User.create([
+	user_data = [
 		{username:'aaron',email:'aaron@example.com',password:'test9000'},
 		{username:'abel',email:'abel@example.com',password:'test9000'},
 		{username:'abraham',email:'abraham@example.com',password:'test9000'},
@@ -1001,7 +1001,15 @@ module SeedUsers
 		{username:'zara',email:'zara@example.com',password:'test9000'},
 		{username:'zoe',email:'zoe@example.com',password:'test9000'},
 		{username:'zoey',email:'zoey@example.com',password:'test9000'}
-	])
+	]
+
+	sample = []
+	for i in 0..99
+		user = user_data[i * 10]
+		sample.push(user) if user
+	end
+
+	User.create(sample)
 
 	puts 'SeedUsers END'
 

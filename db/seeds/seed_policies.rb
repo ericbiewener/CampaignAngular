@@ -186,7 +186,7 @@ module SeedPolicies
 	
 	policies.each do |policy|
 		policy[:user_id] = users.sample.id
-		policy.description = policy.description.gsub! '\n', '
+		policy[:description] = policy[:description].gsub! '\n', '
 '
 	end
 	Policy.create(policies)

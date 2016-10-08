@@ -20,17 +20,16 @@ module SeedCountryVotes
 
 	countries_shuffled = countries.shuffle
 
-	# 80.times do
+	80.times do
 
-	# 	country = countries_shuffled.delete_at(0)
-	# 	rand(5..15).times do
-	# 		users.sample.likes country
-	# 	end
+		country = countries_shuffled.delete_at(0)
+		rand(5..15).times do
+			users.sample.likes country
+		end
 
-	# end
+	end
 
 	30.times do
-	# countries_shuffled.length do
 		
 		country = countries_shuffled.delete_at(0)
 		rand(5..15).times do

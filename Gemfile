@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.3.0'
 
 gem 'angularjs-rails', '~> 1.4.0'
 gem 'angular-rails-templates', '~> 0.2.0'
