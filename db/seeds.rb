@@ -1,5 +1,5 @@
-# require File.expand_path('../seeds/seed_countries', __FILE__)
-# require File.expand_path('../seeds/seed_users', __FILE__)
+require File.expand_path('../seeds/seed_countries', __FILE__)
+require File.expand_path('../seeds/seed_users', __FILE__)
 require File.expand_path('../seeds/seed_user_avatars', __FILE__)
 require File.expand_path('../seeds/seed_policies', __FILE__)
 require File.expand_path('../seeds/seed_comments', __FILE__)
