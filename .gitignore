@@ -39,19 +39,13 @@ bower.json
 # Ignore application configuration
 /config/application.yml
 
-# Personal Todo List
+
 /@TODO.txt
 /app/assets/javascripts/__lib/contrib/debug.addIndicators.min.js
-/app/assets/images/avatar-seed
-
 app/assets/javascripts/jshint.jshintrc
-
 app/assets/javascripts/__dev.js
-
 pg_upgrade_internal.log
-
 pg_upgrade_server.log
-
 pg_upgrade_utility.log
 heroku-deployment.md
 output.sql
