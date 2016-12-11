@@ -1,6 +1,8 @@
 
 # The first crowd-sourced politician
-This is a demo website built primarily in AngularJS and Ruby on Rails. It's fully responsive and compatible with iOS. It has been pretty well tested on Chrome, iPhone 5, and Netscape Navigator. I glanced at it in Firefox & Safari. Currently configured for deployment to Heroku and asset hosting and delivery through Amazon Web Services.
+This is a demo website built primarily in AngularJS and Ruby on Rails. It's fully responsive and compatible with iOS. It has been pretty well tested on Chrome, iPhone 5, and Netscape Navigator. I glanced at it in Firefox & Safari. Currently configured for deployment to Heroku and asset hosting and delivery through Amazon S3 and Cloudfront.
+
+https://campaign-angular.herokuapp.com/
 
 The following is a rough description of the features and technologies used:
 
